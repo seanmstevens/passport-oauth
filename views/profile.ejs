@@ -47,15 +47,22 @@
   <body>
     <nav>
       <ul>
+        <% if (user) { %>
         <li><a href="/auth/logout">Logout</a></li>
+        <% } else { %>
         <li><a href="/auth/login">Login</a></li>
+        <% } %>
         <li><a href="/">Homepage</a></li>
+        <% if (user) { %>
+        <li><a href="/profile">Profile</a></li>
+        <% } %>
       </ul>
     </nav>
     <header>
       <h1>Welcome to your profile, <%= user.username %></h1>
     </header>
     <main>
+      <img src="<%= user.avatar %>" style="border-radius: 2px;"/>
       <p>Extra information about you goes here eventually!!!</p>
     </main>
   </body>

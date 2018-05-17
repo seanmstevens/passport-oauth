@@ -19,7 +19,7 @@ passport.use(
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret
   }, (accessToken, refreshToken, profile, done) => {
-    const { id, displayName } = profile
+    const { id, displayName, _json: { image: { url: avatar }} } = profile
 
     User.findOne({
       googleId: id
@@ -32,7 +32,8 @@ passport.use(
         // if it's a new user
         new User({
           username: displayName,
-          googleId: id
+          googleId: id,
+          avatar
         }).save()
           .then(record => {
             console.log('user added to database', record)
