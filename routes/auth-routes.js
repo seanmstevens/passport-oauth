@@ -6,8 +6,8 @@ router.get('/login', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-  // handle with passport
-  res.send('logging out')
+  req.logout()
+  res.redirect('/')
 })
 
 router.get('/google', passport.authenticate('google', {
@@ -15,9 +15,7 @@ router.get('/google', passport.authenticate('google', {
 }))
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.send({
-    message: 'you reached the callback URI'
-  })
+  res.redirect('/profile')
 })
 
 module.exports = router
